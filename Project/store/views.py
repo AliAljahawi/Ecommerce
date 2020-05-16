@@ -12,6 +12,7 @@ def store(request):
     return render(request, 'store/listview.html', context)
 
 def cart(request):
+    #for me absy
     context = {}
     return render(request, 'store/cart.html', context)
 
