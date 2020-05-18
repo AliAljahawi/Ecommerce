@@ -4,15 +4,16 @@ from django.http import Http404
 
 # Create your views here.
 def home(request):
-    
-#          if request.method == 'POST':
-#         name = request.POST['name']
-#         email = request.POST['email']
-#         phone_number = request.POST['phone_number']
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
 
-#         customer = Customer(name=name, email=email, phone_number=phone_number)
-#         customer.save()
-    context = {}
+    context = {
+    #     'name': name,
+    #     'email': email,
+    #     'phone_number': phone_number
+    }
     return render(request, 'store/home.html', context)
 
 def store(request):
@@ -31,7 +32,7 @@ def detailview(request, product_id):
     context = {
         'product': product
     }
-
+  
     return render(request, 'store/detailview.html', context)    
 
 def cart(request):
