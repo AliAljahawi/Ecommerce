@@ -4,16 +4,7 @@ from django.http import Http404
 
 # Create your views here.
 def home(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        phone_number = request.POST['phone_number']
-
-    context = {
-    #     'name': name,
-    #     'email': email,
-    #     'phone_number': phone_number
-    }
+    context = {}
     return render(request, 'store/home.html', context)
 
 def store(request):
