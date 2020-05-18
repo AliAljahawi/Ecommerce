@@ -4,7 +4,8 @@ from django.http import Http404
 
 # Create your views here.
 def home(request):
-    context = {}
+    products = Product.objects.all()[:3]
+    context = {'products':products}
     return render(request, 'store/home.html', context)
 
 def store(request):
@@ -53,4 +54,6 @@ def checkout(request):
         'order': order,
     }
     return render(request, 'store/checkout.html', context)
+
+    
 

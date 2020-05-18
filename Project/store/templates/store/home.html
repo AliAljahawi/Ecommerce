@@ -12,7 +12,7 @@
         <img class="d-block w-100" src="{% static 'images/cov1.jpg' %}" alt="First slide">
       </div>
 
-      <a href="{% url 'detailview' 1 %}"> detail view</a>
+
 
       <div class="carousel-item">
         <img class="d-block w-100" src="{% static 'images/cov2.jpg' %}" alt="Second slide">
@@ -32,18 +32,25 @@
 </div>
 
 <div class="row" style="margin-top: 10px">
+{% for product in products %}
+{% if product.featured %}
+
     <div class="col-lg-4">
         <img class="thumbnail" src="{% static 'images/placeholder.png' %}">
         <div class="box-element product">
-            <h6><strong>Product</strong></h6>
+            <h6><strong>{{product.title}}</strong></h6>
             <hr>
 
             <button  class="btn btn-outline-success add-btn">Add to Cart</button>
-            <a class="btn btn-outline-info" href="{% url 'detailview' 1%}">More</a>
-            <h4 style="float: right;"><strong>LYD 20</strong></h4>
+            <a class="btn btn-outline-info" href="{% url 'detailview' product.id %}">More</a>
+            <h4 style="float: right;"><strong>{{product.price}} LYD</strong></h4>
 
         </div>
     </div>
+{% endif %}
+{% endfor %}
+</div>
+{% comment %} 
     <div class="col-lg-4">
       <img class="thumbnail" src="{% static 'images/placeholder.png' %}">
       <div class="box-element product">
@@ -68,7 +75,7 @@
 
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 
 <div class="center_div">
     <form>
