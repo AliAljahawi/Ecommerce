@@ -55,5 +55,12 @@ def checkout(request):
     }
     return render(request, 'store/checkout.html', context)
 
+def category(request, category_name):
+    products = Product.objects.filter(category=category_name)
+    context = {
+        'products': products,
+    }
+    return render(request, 'store/category.html', context)
+
     
 
