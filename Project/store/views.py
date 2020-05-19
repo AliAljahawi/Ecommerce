@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import *
 from django.http import Http404
+from django.contrib.auth import authenticate , login
 
 # Create your views here.
 def home(request):
@@ -33,8 +34,7 @@ def cart(request):
         order, created = Order.object.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else: 
-        items = []  
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        return redirect('login')
     context = {
         'items': items,
         'order': order,
@@ -56,4 +56,38 @@ def checkout(request):
     return render(request, 'store/checkout.html', context)
 
     
+def signup(request):
+    if request.method == 'GET':
+        return render(request, 'store/signup.html')
 
+    if request.method == 'POST':
+        username = request.POST["username"]
+        password = request.POST["password"]
+        name = request.POST["name"]
+        email = request.POST["email"]
+        address = request.POST["address"]
+        city = request.POST["city"]
+        phone_number = request.POST["phone_number"]
+
+        user = User.objects.create_user(username , email , password)
+        customer = Customer(user=user,name=name,email=email,address=address,city=city,phone_number=phone_number)
+        customer.save()
+        return redirect('Store Home')
+
+def login_view(request):
+    if request.method == 'GET':
+        return render(request, 'store/login.html')
+
+    if request.method == 'POST':
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request,username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('Store Home')
+        else:
+            return render(request, 'store/login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('Store Home')
