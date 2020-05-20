@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from django.contrib.auth import authenticate , login
-=======
-from django.shortcuts import get_object_or_404, render
->>>>>>> views
 from .models import *
 from django.http import Http404
 
@@ -35,24 +31,12 @@ def detailview(request, product_id):
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
-<<<<<<< HEAD
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else:
         return redirect('login')
         
     context = {'items':items , 'order':order}
-=======
-        order, created = Order.object.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-    else: 
-        items = []  
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-    context = {
-        'items': items,
-        'order': order,
-    }
->>>>>>> views
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
@@ -104,6 +88,14 @@ def login_view(request):
             return redirect('Store Home')
         else:
             return render(request, 'store/login.html')
+def category(request, category_name):
+    products = Product.objects.filter(category=category_name)
+    context = {
+        'products': products,
+    }
+    return render(request, 'store/category.html', context)
+
+    
 
 def logout_view(request):
     logout(request)

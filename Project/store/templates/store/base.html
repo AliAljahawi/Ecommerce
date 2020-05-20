@@ -48,18 +48,19 @@
         </nav>
         <div class="container" style="background-color: #ffffff;">
             <div class="d-flex justify-content-around" >
+                <div class="p-2 bd-highlight">
+                    <a class="nav-link mb-0 h6" style="color: #000000;" href="{% url 'listview' %}">All Categories<span class="sr-only">(current)</span></a>
+                </div>
                  <div class="p-2 bd-highlight">
-                     <a class="nav-link mb-0 h6" style="color: #000000;" href="{% url 'listview' %}">Clothes<span class="sr-only">(current)</span></a>
+                     <a class="nav-link mb-0 h6" style="color: #000000;" href="{% url 'category' 'clothes' %}">Clothes<span class="sr-only">(current)</span></a>
                  </div>
                 <div class="p-2 bd-highlight">
-                     <a class="nav-link mb-0 h6" style="color: #000000;" href="#">Shoes<span class="sr-only">(current)</span></a>
+                     <a class="nav-link mb-0 h6" style="color: #000000;" href="{% url 'category' 'shoes' %}">Shoes<span class="sr-only">(current)</span></a>
                 </div>
                 <div class="p-2 bd-highlight">
-                    <a class="nav-link mb-0 h6" style="color: #000000;" href="#">Accessories<span class="sr-only">(current)</span></a>
+                    <a class="nav-link mb-0 h6" style="color: #000000;" href="{% url 'category' 'accessories' %}">Accessories<span class="sr-only">(current)</span></a>
                 </div>
-                <div class="p-2 bd-highlight">
-                    <a class="nav-link mb-0 h6" style="color: #000000;" href="#">About<span class="sr-only">(current)</span></a>
-                </div>
+                
             </div>
         </div>
         <div class="container">
