@@ -53,9 +53,6 @@ def checkout(request):
     }
     return render(request, 'store/checkout.html', context)
 
-def detailview(request):
-    context = {}
-    return render(request, 'store/detailview.html', context)
 
 def signup(request):
     if request.method == 'GET':
