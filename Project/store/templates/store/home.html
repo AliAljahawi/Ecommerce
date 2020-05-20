@@ -33,9 +33,13 @@
 </div>
 
 <div class="row" style="margin-top: 10px">
+<<<<<<< HEAD
 {% for product in products %}
 {% if product.featured %}
 
+=======
+    {% for product in products %}
+>>>>>>> master
     <div class="col-lg-4">
         <img class="thumbnail" src="{% static 'images/placeholder.png' %}">
         <div class="box-element product">
@@ -43,6 +47,7 @@
             <hr>
 
             <button  class="btn btn-outline-success add-btn">Add to Cart</button>
+<<<<<<< HEAD
             <a class="btn btn-outline-info" href="{% url 'detailview' product.id %}">More</a>
             <h4 style="float: right;"><strong>{{product.price}} LYD</strong></h4>
 
@@ -77,6 +82,15 @@
     </div>
   </div>
 </div> {% endcomment %}
+=======
+            <a class="btn btn-outline-info" href="{% url 'detailview' %}">More</a>
+            <h4 style="float: right;"><strong>LYD{{product.price}}</strong></h4>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+>>>>>>> master
 
 <div class="center_div">
     <form>

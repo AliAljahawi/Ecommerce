@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 from django.shortcuts import get_object_or_404, render, redirect
+=======
+from django.shortcuts import render , redirect
+from django.contrib.auth import authenticate , login
+>>>>>>> master
 from .models import *
 from django.http import Http404
 from django.contrib.auth import authenticate , login
@@ -31,6 +36,7 @@ def detailview(request, product_id):
 def cart(request):
     if request.user.is_authenticated:
         customer = request.user.customer
+<<<<<<< HEAD
         order, created = Order.object.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else: 
@@ -39,6 +45,14 @@ def cart(request):
         'items': items,
         'order': order,
     }
+=======
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+    else:
+        return redirect('login')
+        
+    context = {'items':items , 'order':order}
+>>>>>>> master
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
@@ -55,6 +69,7 @@ def checkout(request):
     }
     return render(request, 'store/checkout.html', context)
 
+<<<<<<< HEAD
 def category(request, category_name):
     products = Product.objects.filter(category=category_name)
     context = {
@@ -63,6 +78,12 @@ def category(request, category_name):
     return render(request, 'store/category.html', context)
 
     
+=======
+def detailview(request):
+    context = {}
+    return render(request, 'store/detailview.html', context)
+
+>>>>>>> master
 def signup(request):
     if request.method == 'GET':
         return render(request, 'store/signup.html')
@@ -88,7 +109,11 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST["username"]
         password = request.POST["password"]
+<<<<<<< HEAD
         user = authenticate(request,username=username, password=password)
+=======
+        user = authenticate(request,username=username, password=username)
+>>>>>>> master
         if user is not None:
             login(request, user)
             return redirect('Store Home')
@@ -97,4 +122,8 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
+<<<<<<< HEAD
     return redirect('Store Home')
+=======
+    return redirect('Store Home')
+>>>>>>> master

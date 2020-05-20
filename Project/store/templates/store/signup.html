@@ -1,4 +1,5 @@
 <form action="{% url 'signup' %}" method="post">
+<<<<<<< HEAD
     {% csrf_token %}
         <input type="text" name="username">
         <br>
@@ -17,3 +18,23 @@
         <button type="submit">singup</button>
     
     </form>
+=======
+{% csrf_token %}
+    <input type="text" name="username">
+    <br>
+    <input type="text" name="password">
+    <br>
+    <input type="text" name="name">
+    <br>
+    <input type="text" name="email">
+    <br>
+    <input type="text" name="address">
+    <br>
+    <input type="text" name="city">
+    <br>
+    <input type="text" name="phone_number">
+
+    <button type="submit">singup</button>
+
+</form>
+>>>>>>> master
