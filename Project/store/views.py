@@ -41,19 +41,26 @@ def cart(request):
     return render(request, 'store/cart.html', context)
 
 def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.object.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-    else: 
-        items = []  
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-    context = {
-        'items': items,
-        'order': order,
-    }
-    return render(request, 'store/checkout.html', context)
-
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            customer = request.user.customer
+            order, created = Order.objects.get_or_create(customer=customer, complete=False)
+            items = order.orderitem_set.all()
+            if items != None:
+                context = {'items': items , 'order': order}
+                return render(request, 'store/checkout.html', context)
+            else:
+                return redirect('Store Home')
+        else:
+            return redirect('login')
+    
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            customer = request.user.customer
+            order = Order.objects.get(customer=customer, complete=False)
+            order.complete = True
+            order.save()
+            return redirect('Store Home')
 
 def signup(request):
     if request.method == 'GET':
@@ -107,3 +114,27 @@ def search(request):
         except Product.DoesNotExist:
             raise Http404("Product does not exist")  
         return render(request,"store/listview.html",{"products":products})
+
+def updateitem(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+    print('product ID : ' , productId)
+    print('Action : ' , action)
+
+    customer = request.user.customer
+    product = Product.objects.get(id=productId)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+
+    orderitem , created = OrderItem.objects.get_or_create(order=order,product=product)
+
+    if action == 'add':
+        orderitem.quantity = orderitem.quantity + 1
+    else:
+        orderitem.quantity = orderitem.quantity - 1
+
+    orderitem.save()
+    if orderitem.quantity <= 0 :
+        orderitem.delete()
+
+    return JsonResponse('item was added' , safe=False)
