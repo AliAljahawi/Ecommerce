@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect, get_object_or_404
 from django.contrib.auth import authenticate , login
 from .models import *
 from django.http import Http404
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
@@ -97,3 +98,12 @@ def category(request, category_name):
 def logout_view(request):
     logout(request)
     return redirect('Store Home')
+
+def search(request):        
+    if request.method == 'GET':    
+        query =  request.GET.get('q')      
+        try:
+            products = Product.objects.filter(Q(title__icontains=query) | Q(brand__icontains=query)) 
+        except Product.DoesNotExist:
+            raise Http404("Product does not exist")  
+        return render(request,"store/listview.html",{"products":products})
