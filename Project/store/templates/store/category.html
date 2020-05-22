@@ -1,6 +1,15 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
+
+<div class="text-align: center">
+    <form method="get">
+    {{myFilter.form}}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<br>
+
 <div class="row">
 {% for product in products %}
 

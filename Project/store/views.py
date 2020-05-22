@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate , login
 from .models import *
 from django.http import Http404
 from django.db.models import Q
+from .filters import ProductFilter
 
 # Create your views here.
 def home(request):
@@ -12,8 +13,13 @@ def home(request):
 
 def store(request):
     products = Product.objects.all()
+
+    myFilter = ProductFilter(request.GET, queryset=products)
+
+    products = myFilter.qs
+
     context = {
-        'products': products
+        'products': products, 'myFilter': myFilter
     }
     return render(request, 'store/listview.html', context)
 
@@ -93,14 +99,20 @@ def login_view(request):
             return redirect('Store Home')
         else:
             return render(request, 'store/login.html')
+
 def category(request, category_name):
     products = Product.objects.filter(category=category_name)
+
+    myFilter = ProductFilter(request.GET, queryset=products)
+
+    products = myFilter.qs
+
     context = {
-        'products': products,
+        'products': products, 'myFilter': myFilter,
     }
     return render(request, 'store/category.html', context)
 
-    
+
 
 def logout_view(request):
     logout(request)
