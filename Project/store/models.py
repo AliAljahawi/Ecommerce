@@ -16,16 +16,23 @@ class Customer(models.Model):
         return self.name
 
 class Product(models.Model):
+
+    Gender = (
+        ('m','Male'),
+        ('f','Female')
+    )
+
     title = models.CharField(max_length=200, null=True)
     details = models.TextField(null=True)
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True)
     color = models.CharField(max_length=200, null=True)
     season = models.CharField(max_length=200, null=True)
-    gender = models.CharField(max_length=200, null=True)
+    gender = models.CharField(choices=Gender, max_length=1)
     brand = models.CharField(max_length=200, null=True)
     size = models.CharField(max_length=200, null=True)
     featured = models.BooleanField(default=False)
     category = models.CharField(max_length=200, null=True)
+
 
     def __str__(self):
         return self.title
