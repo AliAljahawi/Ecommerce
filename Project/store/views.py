@@ -1,9 +1,10 @@
 from django.shortcuts import render , redirect, get_object_or_404
 from django.contrib.auth import authenticate , login
 from .models import *
-from django.http import Http404
+from django.http import Http404 , JsonResponse
 from django.db.models import Q
 from .filters import ProductFilter
+import json
 
 # Create your views here.
 def home(request):
@@ -52,7 +53,8 @@ def checkout(request):
             customer = request.user.customer
             order, created = Order.objects.get_or_create(customer=customer, complete=False)
             items = order.orderitem_set.all()
-            if items != None:
+            print(items.count())
+            if items.count() != 0:
                 context = {'items': items , 'order': order}
                 return render(request, 'store/checkout.html', context)
             else:
