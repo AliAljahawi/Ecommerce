@@ -20,8 +20,9 @@ h1,h2,h3,h4,h5,h6{
 .product{
     border-radius: 0 0 4px 4px;
 }
-.bg-dark{
-    background-color: #4f868c!important;
+
+.navbar{
+	background-color: #65d1dd!important;
 }
 #cart-icon{
     width:35px;
@@ -45,11 +46,17 @@ h1,h2,h3,h4,h5,h6{
     border-radius: 3px;
     margin-left: 2px;
     margin-right: 2px;
+    border-radius: 10px;
+    border-radius: 10px;
 }
 #signup{
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-right: 5px;     
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-right: -10px; 
+    margin-left: -10px;
+    border-radius: 10px;
+    border-radius: 10px;
+        
 }
 .row-image{
     width: 100px;
@@ -138,4 +145,30 @@ input{
     color: #ffffff;
     font-size: 15px;
     margin-left: 20px;
+}
+footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+    justify-content: center;
+	align-items: center;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: #3c97bf;
+}
+
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
 }

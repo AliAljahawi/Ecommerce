@@ -57,7 +57,7 @@ def checkout(request):
 
 def signup(request):
     if request.method == 'GET':
-        return render(request, 'store/signup.html')
+        return render(request, 'store/signinupform.html')
 
     if request.method == 'POST':
         username = request.POST["username"]
@@ -75,7 +75,7 @@ def signup(request):
 
 def login_view(request):
     if request.method == 'GET':
-        return render(request, 'store/login.html')
+        return render(request, 'store/signinupform.html')
 
     if request.method == 'POST':
         username = request.POST["username"]
@@ -85,7 +85,7 @@ def login_view(request):
             login(request, user)
             return redirect('Store Home')
         else:
-            return render(request, 'store/login.html')
+            return render(request, 'store/signinupform.html')
 def category(request, category_name):
     products = Product.objects.filter(category=category_name)
     context = {
