@@ -8,4 +8,4 @@ class ProductFilter(django_filters.FilterSet):
     class Meta:
         model = Product
         fields = '__all__'
-        exclude = ['details','featured']
+        exclude = ['details','featured','image']

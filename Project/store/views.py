@@ -6,6 +6,7 @@ from django.db.models import Q
 from .filters import ProductFilter
 import json
 
+
 # Create your views here.
 def home(request):
     products = Product.objects.all()[:3]
